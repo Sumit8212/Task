@@ -1,112 +1,37 @@
-const prompt = require("prompt-sync")();
 
-prompt("\n press enter to start the game \n ");
+var stack = new stack();
 
-let randomNum;
-function getLuckyNumber() {
-  randomNum = getRandom(1, 10);
+let expression = "( )";
+if (balance_check(expression)) {
+  console.log("balanced");
+} else {
+  console.log("not balanced");
 }
 
-getLuckyNumber();
-const luckyNum = randomNum;
-prompt("your lucky number is :" + luckyNum);
+function balance_check(expression) {
 
-for (let i = 1; i >= 0; i--) {
-  var num = getRandom(1, 10);
-  console.log("random no is: " + num);
-  if (luckyNum === num) {
-    prompt("you win \n");
-    console.log("Hurray you won!!\t GAME END. \n");
-    break;
-  } else {
-    if (luckyNum === num) {
-      prompt("you win!\n");
-      console.log("Hurray you won!!\t GAME END. \n");
-    } else {
-      if (i == 1) {
-        prompt("please try again! you have " + i + " chance left,  \n");
-      } else {
-        prompt("sorry you lose!\n");
-        console.log("The game is over better luck next time.\n");
-      }
-      // prompt("your lucky number is :" + luckyNum);
-    }
-  }
+// if (expression.length==0)
+// return true;
+
+
+for ( i = 0; i < expression.length; i++)
+{
+ let char  = expression[i];
+ if (char == '{' || char == '(' || char == '[')
+ {
+     stack.push(char);
+ }
+ if (char == '}' || char == ')' || char == ']')
+ {
+     if (stack.length==0)
+         return false;
+     let last = stack.peek();
+     if (char == '}' && last == '{' || char == ')' && last == '(' || char == ']' && last == '[')
+         stack.pop();
+     else 
+         return false;
+ }
 }
-
-function getRandom(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+return expression.length==0?true:false; 
 }
-
-
-
-
-
-
-// const prompt = require("prompt-sync")();
-
-// prompt("\n press enter to start the game \n ");
-
-// let usedNumbers = [];
-// function getRandom() {
-//   let randomNumber = Math.floor((Math.random() *10)+1);
-  
-//   while (usedNumbers.includes(randomNumber)) {
-//     randomNumber = Math.floor((Math.random() *10)+1);
-//   }
-  
-//   usedNumbers.push(randomNumber);
-//   return randomNumber;
-// }
-
-// let randomNum;
-// function getLuckyNumber() {
-//   randomNum =  Math.floor((Math.random() *10)+1);
-// }
-
-// getLuckyNumber();
-// const luckyNum = randomNum;
-// prompt("your lucky number is :" + luckyNum);
-
-// for (let i = 1; i >= 0; i--) {
-//   var num = getRandom();
-//   console.log("random no is: " + num);
-//   if (luckyNum === num) {
-//     prompt("you win \n");
-//     console.log("Hurray you won!!\t GAME END. \n");
-//     break;
-//   } else {
-//     // if (luckyNum === num) {
-//     //   prompt("you win!\n");
-//     //   console.log("Hurray you won!!\t GAME END. \n");
-//     // } else {
-//       if (i == 1) {
-//         prompt("please try again! you have " + i + " chance left,  \n");
-//       } else {
-//         prompt("sorry you lose!\n");
-//         console.log("The game is over better luck next time.\n");
-//       }
-//       // prompt("your lucky number is :" + luckyNum);
-//     // }
-//   }
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
