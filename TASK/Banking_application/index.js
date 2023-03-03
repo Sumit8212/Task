@@ -25,8 +25,8 @@ let name,
   emiPeriod,
   bank_bal = 0,
   count = 0;
-// var value = new Array();
-// let el;
+var value = new Array();
+let el;
 let usedNumbers = [];
 function getRandom() {
   let randomNumber = Math.floor(Math.random() * 10000000000 + 1);
@@ -185,6 +185,7 @@ function print_details() {
   }
   // returnF();
 }
+
 function switch1(condition) {
   let check = condition;
   switch (check) {
@@ -262,7 +263,7 @@ function withdraw() {
     }
   }
   if (count > 0) {
-    user_input = parseInt(prompt("enter account number to show details : "));
+    user_input = parseInt(prompt("enter account number to WITHDRAW MONEY: "));
     if (user_input == account_no) {
       let w = pin();
       if (bank_bal > w) {
@@ -272,7 +273,8 @@ function withdraw() {
         // return withDraw;
       } else {
         console.log("your balnce is low. Try with lower amount!");
-        withdraw();
+        // withdraw();
+        returnF();
       }
     } else {
       console.log("...failed\t Enter Valid Account no: ");
@@ -497,6 +499,7 @@ function account_details() {
 }
 
 function userAccount_details() {
+  console.log(account_no);
   user_input = parseInt(prompt("enter account number to show details : "));
   if (user_input == account_no) {
     console.log("name :" + name);
