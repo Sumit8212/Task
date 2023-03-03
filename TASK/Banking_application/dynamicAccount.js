@@ -108,6 +108,7 @@ function email_id() {
   return email;
 }
 
+// CREATING ACCOUNT WITH USER INPUT
 function account() {
   obj = {
     name: fullName(),
@@ -118,6 +119,7 @@ function account() {
     bank_bal: 0,
     f_amount: 0,
     emi: 0,
+    emiPeriod:0,
   };
   value.push(obj);
 }
@@ -175,13 +177,14 @@ function switch1(condition) {
 //   value.push(obj);
 // }
 
+//FUNCTION FOR PRINTING DETAILS OF ACCOUNT
 function printDetails() {
   let user_input = prompt("Enter mail: ");
   // temp = bank_bal;
-  console.log("Details: ");
   for (i = 0; i < value.length; i++) {
     console.log(i);
     if (value[i].email_ID === user_input) {
+      console.log("Details: ");
       console.log(value[i]);
       break;
     }
@@ -192,6 +195,7 @@ function printDetails() {
   returnF();
 }
 
+// FUNCTION TO DEPOIST ACCOUNT BALANCE
 function deposit() {
   let user_input = prompt("Enter mail: ");
   for (i = 0; i < value.length; i++) {
@@ -211,6 +215,7 @@ function deposit() {
   returnF();
 }
 
+// FUNCTION TO WITHDRAW ACCOUNT BALANCE
 function withdraw() {
   let user_input = prompt("Enter mail: ");
   for (i = 0; i < value.length; i++) {
@@ -231,7 +236,7 @@ function withdraw() {
   }
   returnF();
 }
-
+// FUNCTION TO TAKE LOAN
 function loan() {
   let user_input = prompt("Enter mail: ");
   for (i = 0; i < value.length; i++) {
@@ -278,7 +283,7 @@ function carLoan() {
   SI = (amount * 8 * duration) / 100;
   value[i].f_amount = amount + SI;
   console.log("Total amount to pay with intrest rate at 8%", value[i].f_amount);
-  emiPeriod = duration * 12;
+  value[i].emiPeriod = duration * 12;
   value[i].emi = value[i].f_amount / (duration * 12);
   value[i].bank_bal = value[i].bank_bal + amount;
   console.log("bank_bal :", value[i].bank_bal);
@@ -292,7 +297,7 @@ function homeLoan() {
   SI = (amount * 6 * duration) / 100;
   value[i].f_amount = amount + SI;
   console.log("Total amount to pay with intrest rate at 6%", value[i].f_amount);
-  emiPeriod = duration * 12;
+  value[i].emiPeriod = duration * 12;
   value[i].emi = value[i].f_amount / (duration * 12);
   value[i].bank_bal = value[i].bank_bal + amount;
   console.log("bank_bal :", value[i].bank_bal);
@@ -306,27 +311,29 @@ function EduLoan() {
   SI = (amount * 4 * duration) / 100;
   value[i].f_amount = amount + SI;
   console.log("Total amount to pay with intrest rate at 4%", value[i].f_amount);
-  emiPeriod = duration * 12;
+  value[i].emiPeriod = duration * 12;
   value[i].emi = value[i].f_amount / (duration * 12);
   value[i].bank_bal = value[i].bank_bal + amount;
   console.log("bank_bal :", value[i].bank_bal);
   returnF();
 }
 
+
+// FUNCTION TO PAY EMI
 function payEmi() {
   let user_input = prompt("Enter mail: ");
   for (i = 0; i < value.length; i++) {
     if (value[i].email_ID === user_input) {
       if (value[i].f_amount <= 0) {
         console.log("NO EMI TO PAY.\n");
-        // returnF();
+        returnF();
         return;
       }
       if (value[i].bank_bal >= value[i].emi && value[i].f_amount >= 0) {
         value[i].bank_bal = value[i].bank_bal - value[i].emi;
         value[i].f_amount = value[i].f_amount - value[i].emi;
         console.log("EMI PAID", "your bank balance is now ", value[i].bank_bal);
-        emiPeriod--;
+        value[i].emiPeriod--;
       } else {
         console.log("YOU HAVE NOT SUFFICIENT FUND!\n");
       }
