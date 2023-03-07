@@ -6,18 +6,12 @@ let condition = parseInt(
 );
 
 let obj,
-  tempObj,
-  check,
-  account_no,
   amount = 0,
-  f_amount = 0,
-  duration,
-  emi,
-  emiPeriod,
-  bank_bal = 0;
+  duration;
 var value = [];
 
 let usedNumbers = [];
+
 function getRandom() {
   let randomNumber = Math.floor(Math.random() * 10000000000 + 1);
 
@@ -119,7 +113,7 @@ function account() {
     bank_bal: 0,
     f_amount: 0,
     emi: 0,
-    emiPeriod:0,
+    emiPeriod: 0,
   };
   value.push(obj);
 }
@@ -130,7 +124,7 @@ function returnF() {
       "press 0: exit\t 1 :create bank account\t 2: Deposit\t 3: WithDraw\t 4: Take Loan\t 5: Pay EMI\t  6: Bank details ==>> : "
     )
   );
-  if (cond === 0) {
+  if (cond == 0) {
     return console.log("\nTHANK YOU FOR BANKING\n");
   } else {
     //FOR CHECKING VALID INPUT FOR THE PERFORME BANKING FUNCTION
@@ -260,20 +254,19 @@ function loan() {
         } else {
           console.log("Invalid input!\t Enter detail again.");
           // loan();
-          // returnF();
+          returnF();
         }
       } else {
         console.log("Your have 1 active loan so you can't take another");
-        // returnF();
+        returnF();
       }
       break;
     }
     if (i === value.length - 1) {
       console.log("invalid credentials");
+      returnF();
     }
   }
-
-  returnF();
 }
 
 // FUNCTION TO TAKE CAR LOAN
@@ -317,7 +310,6 @@ function EduLoan() {
   console.log("bank_bal :", value[i].bank_bal);
   returnF();
 }
-
 
 // FUNCTION TO PAY EMI
 function payEmi() {
